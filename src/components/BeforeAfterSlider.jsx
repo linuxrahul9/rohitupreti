@@ -75,6 +75,8 @@ export default function BeforeAfterSlider({
         <img
           src={afterImage}
           alt="Master Graded Version"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute top-4 right-4 bg-amber-500/90 text-black font-mono text-xs font-bold px-3 py-1 rounded shadow-lg backdrop-blur pointer-events-none">
@@ -89,6 +91,8 @@ export default function BeforeAfterSlider({
           <img
             src={beforeImage}
             alt="Original Flat RAW"
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover max-w-none"
             style={{ width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%', height: '100%' }}
           />

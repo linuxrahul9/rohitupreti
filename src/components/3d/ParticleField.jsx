@@ -1,85 +1,97 @@
 import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
 
-export default function ParticleField({ count = 80, color = 0xf59e0b }) {
+export default function ParticleField({ count = 35, color = '#f59e0b' }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const container = canvasRef.current;
-    if (!container) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 100);
-    camera.position.z = 20;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    container.appendChild(renderer.domElement);
+    let width = (canvas.width = canvas.parentElement.clientWidth || window.innerWidth);
+    let height = (canvas.height = canvas.parentElement.clientHeight || 700);
 
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array(count * 3);
-    const speeds = new Float32Array(count);
-
+    const particles = [];
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 35;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 25;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
-      speeds[i] = 0.005 + Math.random() * 0.015;
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2 + 0.8,
+        speedY: -(Math.random() * 0.4 + 0.15),
+        speedX: (Math.random() - 0.5) * 0.25,
+        alpha: Math.random() * 0.5 + 0.2,
+      });
     }
 
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    let isVisible = true;
+    let animId = null;
 
-    const material = new THREE.PointsMaterial({
-      color: color,
-      size: 0.22,
-      transparent: true,
-      opacity: 0.45,
-      blending: THREE.AdditiveBlending,
-    });
+    const render = () => {
+      if (!isVisible) return;
+      ctx.clearRect(0, 0, width, height);
 
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
+      ctx.fillStyle = color;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.y += p.speedY;
+        p.x += p.speedX;
 
-    let animId;
-    const animate = () => {
-      animId = requestAnimationFrame(animate);
-      const posArray = geometry.attributes.position.array;
+        if (p.y < -10) p.y = height + 10;
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
 
-      for (let i = 0; i < count; i++) {
-        posArray[i * 3 + 1] += speeds[i];
-        if (posArray[i * 3 + 1] > 12) {
-          posArray[i * 3 + 1] = -12;
-        }
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
       }
-      geometry.attributes.position.needsUpdate = true;
-      particles.rotation.y += 0.0005;
 
-      renderer.render(scene, camera);
+      animId = requestAnimationFrame(render);
     };
 
-    animate();
+    // Pause canvas when hero is scrolled out of view!
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!isVisible) {
+            isVisible = true;
+            render();
+          }
+        } else {
+          isVisible = false;
+          if (animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+          }
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(canvas);
+    render();
 
     const handleResize = () => {
-      if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
+      if (!canvas || !canvas.parentElement) return;
+      width = canvas.width = canvas.parentElement.clientWidth;
+      height = canvas.height = canvas.parentElement.clientHeight;
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
-      cancelAnimationFrame(animId);
+      isVisible = false;
+      if (animId) cancelAnimationFrame(animId);
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
-      if (container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
-      renderer.dispose();
-      geometry.dispose();
-      material.dispose();
     };
   }, [count, color]);
 
-  return <div ref={canvasRef} className="pointer-events-none absolute inset-0 z-0 opacity-70" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none absolute inset-0 w-full h-full z-0 opacity-60"
+    />
+  );
 }
-

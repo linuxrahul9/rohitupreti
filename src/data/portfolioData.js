@@ -15,7 +15,7 @@ export const PHOTOS = [
     location: 'Kedarnath Peak, Rudraprayag, Uttarakhand',
     camera: 'Sony A7IV • 24-70mm f/2.8 GM II',
     settings: '1/400s • f/8.0 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1605649487212-47bdab064df7?q=80&w=800&auto=format&fit=crop',
     featured: true,
     aspect: 'aspect-[4/5]',
     description: 'First alpine glow touching the sacred snowy peaks of the Mandakini valley near Kedarnath at 3,583 meters.'
@@ -27,7 +27,7 @@ export const PHOTOS = [
     location: 'Ganga Ghats, Taj Rishikesh, Uttarakhand',
     camera: 'Sony FX3 • 85mm f/1.4 GM',
     settings: '1/500s • f/1.4 • ISO 200',
-    imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
     featured: true,
     aspect: 'aspect-[3/4]',
     description: 'Intimate Ganga-aarti vows and royal pheras right on the pristine white-sand riverbank of Rishikesh.'
@@ -39,7 +39,7 @@ export const PHOTOS = [
     location: 'Naini Lake, Nainital, Uttarakhand',
     camera: 'Sony A7IV • 16-35mm f/2.8 GM',
     settings: '1/320s • f/7.1 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1622308644420-a70081d6d5ef?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1622308644420-a70081d6d5ef?q=80&w=800&auto=format&fit=crop',
     featured: true,
     aspect: 'aspect-[4/3]',
     description: 'Morning mist rolling over the jewel-green waters of Nainital surrounded by pine-dusted Kumaon hills.'
@@ -51,7 +51,7 @@ export const PHOTOS = [
     location: 'Chopta / Chandrashila, Uttarakhand',
     camera: 'Sony A7IV • 24-70mm f/2.8 GM II',
     settings: '1/640s • f/5.6 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop',
     featured: true,
     aspect: 'aspect-[4/5]',
     description: 'The highest Shiva shrine in the world at 3,680m amidst alpine rhododendron meadows and snow dusting.'
@@ -63,7 +63,7 @@ export const PHOTOS = [
     location: 'George Everest Peak, Mussoorie, Uttarakhand',
     camera: 'Sony FX3 • 50mm f/1.2 GM',
     settings: '1/250s • f/1.4 • ISO 400',
-    imageUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop',
     featured: true,
     aspect: 'aspect-[3/4]',
     description: 'Cold pyros and golden hour sunset overlooking the vast Doon Valley from Mussoorie ridge.'
@@ -75,7 +75,7 @@ export const PHOTOS = [
     location: 'Auli Ski Slopes, Chamoli, Uttarakhand',
     camera: 'DJI Mavic 3 Pro Cine (Apple ProRes)',
     settings: '1/1000s • f/2.8 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?q=80&w=800&auto=format&fit=crop',
     featured: true,
     aspect: 'aspect-[16/9]',
     description: 'Crisp winter snow blankets the slopes of Auli with the mighty Nanda Devi peak standing tall.'
@@ -87,7 +87,7 @@ export const PHOTOS = [
     location: 'Dhikala Zone, Jim Corbett, Uttarakhand',
     camera: 'Sony A7IV • 200-600mm f/5.6-6.3 G OSS',
     settings: '1/800s • f/6.3 • ISO 800',
-    imageUrl: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?q=80&w=800&auto=format&fit=crop',
     featured: false,
     aspect: 'aspect-[4/5]',
     description: 'A wild Bengal tiger crossing the Ramganga riverbed in Uttarakhand’s legendary tiger reserve.'
@@ -99,7 +99,7 @@ export const PHOTOS = [
     location: 'Har Ki Pauri, Haridwar, Uttarakhand',
     camera: 'Sony FX3 • 35mm f/1.4 GM',
     settings: '1/160s • f/1.4 • ISO 1200',
-    imageUrl: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1567157577867-05ccb1388e66?q=80&w=800&auto=format&fit=crop',
     featured: false,
     aspect: 'aspect-[3/4]',
     description: 'Thousands of floating brass oil lamps reflecting across the swift sacred waters of the holy Ganges.'
@@ -111,7 +111,7 @@ export const PHOTOS = [
     location: 'Tehri Garhwal, Uttarakhand',
     camera: 'DJI Mavic 3 Pro Cine',
     settings: '1/500s • f/4.0 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
     featured: false,
     aspect: 'aspect-[16/10]',
     description: 'The monumental emerald blue waters of Tehri lake framed by towering Garhwal mountain ridges.'
@@ -123,7 +123,7 @@ export const PHOTOS = [
     location: 'Kasar Devi, Almora, Kumaon, Uttarakhand',
     camera: 'Sony A7IV • 85mm f/1.4 GM',
     settings: '1/400s • f/1.4 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop',
     featured: false,
     aspect: 'aspect-[3/4]',
     description: 'Traditional Kumaoni gold Nath and Pichora depicted with soft mountain daylight in Almora.'
@@ -135,7 +135,7 @@ export const PHOTOS = [
     location: 'Ram Jhula Ghats, Rishikesh, Uttarakhand',
     camera: 'Sony FX3 • 24-70mm f/2.8 GM II',
     settings: '1/200s • f/2.8 • ISO 640',
-    imageUrl: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop',
     featured: false,
     aspect: 'aspect-[4/3]',
     description: 'Deep cobalt blue twilight falling over the foothills of Rishikesh as temple bells echo.'
@@ -147,7 +147,7 @@ export const PHOTOS = [
     location: 'Bhimtal & Sattal, Nainital District, Uttarakhand',
     camera: 'Sony A7IV • 50mm f/1.2 GM',
     settings: '1/500s • f/2.0 • ISO 100',
-    imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1400&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=800&auto=format&fit=crop',
     featured: false,
     aspect: 'aspect-[4/5]',
     description: 'Golden morning light filtering through deep Deodar cedar forests in the Kumaon hills.'
@@ -163,7 +163,7 @@ export const FILMS_DATA = [
     location: 'Taj Rishikesh Resort, Uttarakhand',
     duration: '4:25 min',
     resolution: '4K DCI • 10-Bit 4:2:2 • S-Log3',
-    thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400&auto=format&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
     previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-bride-and-groom-posing-for-a-photo-shoot-41808-large.mp4',
     tags: ['Taj Rishikesh', 'Ganga Aarti Vows', 'DaVinci 35mm Film Grade'],
     description: 'A 3-day royal riverside celebration woven into a poignant cinematic documentary on the banks of the sacred Ganges in Rishikesh.'
@@ -176,7 +176,7 @@ export const FILMS_DATA = [
     location: 'Kedarnath, Chopta, Nainital & Auli, Uttarakhand',
     duration: '3:10 min',
     resolution: '5.1K 50FPS • Apple ProRes • HDR',
-    thumbnail: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1400&auto=format&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop',
     previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-snow-capped-mountains-43573-large.mp4',
     tags: ['FPV Mountain Drone', 'Tungnath High Peaks', 'Auli Snow Cinema'],
     description: 'High-speed FPV drone dives and sweeping mountain vistas capturing the sacred soul of the Garhwal and Kumaon Himalayas.'
@@ -189,7 +189,7 @@ export const FILMS_DATA = [
     location: 'George Everest Peak, Mussoorie, Uttarakhand',
     duration: '2:50 min',
     resolution: '4K 120FPS Slow-Mo • S-Log3',
-    thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1400&auto=format&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop',
     previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-young-couple-walking-along-the-beach-at-sunset-41489-large.mp4',
     tags: ['Mussoorie Ridge', 'Sunset Cloud Walk', 'Sony FX3 Cinema'],
     description: 'Breathtaking 360-degree ridge walk as the sunset colors paint the clouds hovering above the Doon Valley.'
@@ -202,7 +202,7 @@ export const FILMS_DATA = [
     location: 'Ramnagar / Jim Corbett, Uttarakhand',
     duration: '1:45 min',
     resolution: '4K UHD • Cinema Scope 2.39:1',
-    thumbnail: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?q=80&w=1400&auto=format&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1561731216-c3a4d99437d5?q=80&w=800&auto=format&fit=crop',
     previewVideoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-modern-luxury-hotel-room-with-a-bed-and-a-large-window-41829-large.mp4',
     tags: ['Corbett Wilderness', 'Jungle Luxury', 'Ambient Soundscapes'],
     description: 'Commercial film shot for international luxury eco-resort nestled by the dense sal forests of Jim Corbett National Park.'

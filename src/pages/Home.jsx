@@ -23,12 +23,11 @@ export default function Home() {
   const featuredFilm = FILMS_DATA[0];
 
   return (
-    <div className="relative min-h-screen bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 overflow-hidden transition-colors duration-300">
-      {/* 3D Ambient Dust Particles in background */}
-      <ParticleField count={60} color={0xf59e0b} />
-
+    <div className="relative min-h-screen bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 overflow-x-hidden transition-colors duration-300">
       {/* ================= HERO SECTION ================= */}
-      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 border-b border-slate-200 dark:border-white/5">
+      <section className="relative pt-28 pb-16 lg:pt-36 lg:pb-24 border-b border-slate-200 dark:border-white/5 overflow-hidden">
+        {/* Confined Ambient Dust Particles in Hero Only */}
+        <ParticleField count={30} color="#f59e0b" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
@@ -276,7 +275,9 @@ export default function Home() {
                       <img
                         src={film.thumbnail}
                         alt={film.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent"></div>
 
@@ -386,6 +387,8 @@ export default function Home() {
                     <img
                       src={photo.imageUrl}
                       alt={photo.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>

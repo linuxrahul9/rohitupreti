@@ -14,30 +14,31 @@ export default function Hero3DCamera() {
       45,
       currentMount.clientWidth / currentMount.clientHeight,
       0.1,
-      1000
+      100
     );
     camera.position.set(0, 0, 7.5);
 
+    // Optimized WebGLRenderer with capped pixel ratio (1.5 max) for high FPS
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
       antialias: true,
       powerPreference: 'high-performance'
     });
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.1;
     currentMount.appendChild(renderer.domElement);
 
     // Group for the entire 3D camera
     const cameraRig = new THREE.Group();
     scene.add(cameraRig);
 
-    // Camera Body (Matte Black with Chamfered Feel)
-    const bodyGeo = new THREE.BoxGeometry(2.4, 1.6, 1.1, 4, 4, 4);
+    // Camera Body (Standard material - ultra fast GPU rendering)
+    const bodyGeo = new THREE.BoxGeometry(2.4, 1.6, 1.1);
     const bodyMat = new THREE.MeshStandardMaterial({
       color: 0x111622,
-      roughness: 0.35,
+      roughness: 0.4,
       metalness: 0.8,
     });
     const cameraBody = new THREE.Mesh(bodyGeo, bodyMat);
@@ -55,13 +56,13 @@ export default function Hero3DCamera() {
     cameraRig.add(grip);
 
     // Red recording tally lamp
-    const tallyGeo = new THREE.SphereGeometry(0.06, 16, 16);
+    const tallyGeo = new THREE.SphereGeometry(0.06, 8, 8);
     const tallyMat = new THREE.MeshBasicMaterial({ color: 0xff2222 });
     const tally = new THREE.Mesh(tallyGeo, tallyMat);
     tally.position.set(0.9, 0.6, 0.56);
     cameraRig.add(tally);
 
-    // Viewfinder hump / Pentaprism
+    // Viewfinder hump
     const prismGeo = new THREE.CylinderGeometry(0.65, 0.8, 0.5, 4);
     const prismMat = new THREE.MeshStandardMaterial({
       color: 0x181e2b,
@@ -85,37 +86,35 @@ export default function Hero3DCamera() {
     cameraRig.add(hotshoe);
 
     // Shutter button (Golden metallic accent)
-    const shutterGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.14, 24);
+    const shutterGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.14, 16);
     const goldAccentMat = new THREE.MeshStandardMaterial({
       color: 0xf59e0b,
-      roughness: 0.2,
-      metalness: 0.95,
-      emissive: 0xd97706,
-      emissiveIntensity: 0.2,
+      roughness: 0.25,
+      metalness: 0.9,
     });
     const shutter = new THREE.Mesh(shutterGeo, goldAccentMat);
     shutter.position.set(1.1, 0.82, 0.4);
     cameraRig.add(shutter);
 
     // Mode dial
-    const dialGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.15, 24);
+    const dialGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.15, 16);
     const dial = new THREE.Mesh(dialGeo, hotshoeMat);
     dial.position.set(-0.7, 0.86, 0);
     cameraRig.add(dial);
 
-    // Lens Barrel assembly (cylinders)
+    // Lens Barrel assembly
     const lensGroup = new THREE.Group();
     lensGroup.position.set(0, 0, 0.55);
 
-    // Outer Mount Ring (Gold Anodized Ring)
-    const mountRingGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.12, 48);
+    // Mount Ring
+    const mountRingGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.12, 24);
     mountRingGeo.rotateX(Math.PI / 2);
     const mountRing = new THREE.Mesh(mountRingGeo, goldAccentMat);
     mountRing.position.set(0, 0, 0.06);
     lensGroup.add(mountRing);
 
     // Main barrel
-    const barrelGeo = new THREE.CylinderGeometry(0.85, 0.88, 1.2, 48);
+    const barrelGeo = new THREE.CylinderGeometry(0.85, 0.88, 1.2, 24);
     barrelGeo.rotateX(Math.PI / 2);
     const barrelMat = new THREE.MeshStandardMaterial({
       color: 0x141824,
@@ -126,39 +125,33 @@ export default function Hero3DCamera() {
     barrel.position.set(0, 0, 0.65);
     lensGroup.add(barrel);
 
-    // Focus Ribbed Ring
-    const ribGeo = new THREE.TorusGeometry(0.86, 0.04, 16, 64);
-    const ribMat = new THREE.MeshStandardMaterial({
-      color: 0x222a3a,
-      roughness: 0.8,
-    });
-    for (let i = 0; i < 4; i++) {
+    // Focus Ribbed Rings (optimized count to 3)
+    const ribGeo = new THREE.TorusGeometry(0.86, 0.04, 8, 24);
+    const ribMat = new THREE.MeshStandardMaterial({ color: 0x222a3a, roughness: 0.8 });
+    for (let i = 0; i < 3; i++) {
       const rib = new THREE.Mesh(ribGeo, ribMat);
-      rib.position.set(0, 0, 0.4 + i * 0.18);
+      rib.position.set(0, 0, 0.45 + i * 0.22);
       lensGroup.add(rib);
     }
 
-    // Front Glass Element (Iridescent / Anti-reflective Coating)
-    const glassGeo = new THREE.SphereGeometry(0.72, 32, 16, 0, Math.PI * 2, 0, Math.PI / 3);
+    // Front Glass Element (Optimized Standard material instead of heavy Physical material)
+    const glassGeo = new THREE.SphereGeometry(0.72, 20, 10, 0, Math.PI * 2, 0, Math.PI / 3);
     glassGeo.rotateX(Math.PI / 2);
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0x10b981,
-      emissive: 0x06b6d4,
-      emissiveIntensity: 0.25,
-      roughness: 0.05,
-      metalness: 0.1,
-      transmission: 0.6,
-      ior: 1.52,
-      reflectivity: 0.9,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
+    const glassMat = new THREE.MeshStandardMaterial({
+      color: 0x06b6d4,
+      emissive: 0x0891b2,
+      emissiveIntensity: 0.2,
+      roughness: 0.1,
+      metalness: 0.7,
+      transparent: true,
+      opacity: 0.65,
     });
     const glass = new THREE.Mesh(glassGeo, glassMat);
     glass.position.set(0, 0, 1.15);
     lensGroup.add(glass);
 
-    // Inner aperture ring glow
-    const apertureRingGeo = new THREE.RingGeometry(0.25, 0.35, 32);
+    // Inner aperture ring
+    const apertureRingGeo = new THREE.RingGeometry(0.25, 0.35, 20);
     const apertureRingMat = new THREE.MeshBasicMaterial({
       color: 0xf59e0b,
       side: THREE.DoubleSide,
@@ -171,70 +164,39 @@ export default function Hero3DCamera() {
 
     cameraRig.add(lensGroup);
 
-    // Orbiting Floating 3D Golden Bokeh Particles
-    const particleCount = 120;
+    // Optimized Bokeh Particles (reduced count to 45)
+    const particleCount = 45;
     const particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
-    const scales = new Float32Array(particleCount);
 
     for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 12;
-      positions[i + 1] = (Math.random() - 0.5) * 8;
-      positions[i + 2] = (Math.random() - 0.5) * 8 - 1;
-      scales[i / 3] = Math.random() * 0.8 + 0.3;
+      positions[i] = (Math.random() - 0.5) * 10;
+      positions[i + 1] = (Math.random() - 0.5) * 7;
+      positions[i + 2] = (Math.random() - 0.5) * 6 - 1;
     }
 
     particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particleMat = new THREE.PointsMaterial({
       color: 0xfbbf24,
-      size: 0.12,
+      size: 0.15,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0.55,
       blending: THREE.AdditiveBlending,
     });
     const particles = new THREE.Points(particleGeo, particleMat);
     scene.add(particles);
 
-    // 3D Viewfinder Guide Lines (Holographic HUD)
-    const hudGroup = new THREE.Group();
-    const hudMat = new THREE.LineBasicMaterial({
-      color: 0xf59e0b,
-      transparent: true,
-      opacity: 0.35,
-    });
-
-    const createCrosshair = (x, y, z, size) => {
-      const points = [];
-      points.push(new THREE.Vector3(x - size, y, z));
-      points.push(new THREE.Vector3(x + size, y, z));
-      points.push(new THREE.Vector3(x, y - size, z));
-      points.push(new THREE.Vector3(x, y + size, z));
-      const geom = new THREE.BufferGeometry().setFromPoints(points);
-      return new THREE.LineSegments(geom, hudMat);
-    };
-
-    const cross1 = createCrosshair(-1.5, 1.0, 1.5, 0.2);
-    const cross2 = createCrosshair(1.5, 1.0, 1.5, 0.2);
-    const cross3 = createCrosshair(-1.5, -1.0, 1.5, 0.2);
-    const cross4 = createCrosshair(1.5, -1.0, 1.5, 0.2);
-    hudGroup.add(cross1, cross2, cross3, cross4);
-    scene.add(hudGroup);
-
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // Lights (Balanced and efficient)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
     scene.add(ambientLight);
 
-    const goldKeyLight = new THREE.DirectionalLight(0xf59e0b, 3.2);
-    goldKeyLight.position.set(5, 5, 4);
+    const goldKeyLight = new THREE.DirectionalLight(0xf59e0b, 2.5);
+    goldKeyLight.position.set(4, 4, 3);
     scene.add(goldKeyLight);
 
-    const cyanRimLight = new THREE.DirectionalLight(0x06b6d4, 2.5);
-    cyanRimLight.position.set(-6, -3, -3);
+    const cyanRimLight = new THREE.DirectionalLight(0x06b6d4, 2.0);
+    cyanRimLight.position.set(-5, -2, -2);
     scene.add(cyanRimLight);
-
-    const softFill = new THREE.PointLight(0xffffff, 1.2, 10);
-    softFill.position.set(0, 3, 4);
-    scene.add(softFill);
 
     // Interactive Mouse Tracking with Damping
     const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
@@ -247,19 +209,7 @@ export default function Hero3DCamera() {
       mouse.targetY = -(clientY / rect.height) * 2 + 1;
     };
 
-    const handleTouchMove = (e) => {
-      if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        const rect = currentMount.getBoundingClientRect();
-        const clientX = touch.clientX - rect.left;
-        const clientY = touch.clientY - rect.top;
-        mouse.targetX = (clientX / rect.width) * 2 - 1;
-        mouse.targetY = -(clientY / rect.height) * 2 + 1;
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     // Handle Resize
     const handleResize = () => {
@@ -268,13 +218,16 @@ export default function Hero3DCamera() {
       camera.updateProjectionMatrix();
       renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    // Animation Loop
-    let animationFrameId;
+    // INTERSECTION OBSERVER: Pause rendering when scrolled out of view!
+    let isVisible = true;
+    let animationFrameId = null;
     let clock = new THREE.Clock();
 
     const animate = () => {
+      if (!isVisible) return;
+
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
@@ -283,34 +236,47 @@ export default function Hero3DCamera() {
       mouse.y += (mouse.targetY - mouse.y) * 0.05;
 
       // Camera Rig Rotation & Float
-      cameraRig.rotation.y = mouse.x * 0.6 + Math.sin(elapsedTime * 0.5) * 0.08;
-      cameraRig.rotation.x = -mouse.y * 0.4 + Math.cos(elapsedTime * 0.7) * 0.05;
-      cameraRig.position.y = Math.sin(elapsedTime * 1.2) * 0.12;
+      cameraRig.rotation.y = mouse.x * 0.5 + Math.sin(elapsedTime * 0.5) * 0.06;
+      cameraRig.rotation.x = -mouse.y * 0.35 + Math.cos(elapsedTime * 0.7) * 0.04;
+      cameraRig.position.y = Math.sin(elapsedTime * 1.2) * 0.1;
 
-      // Lens inner ring pulse
-      innerRing.rotation.z = elapsedTime * 0.4;
-      const pulse = 1 + Math.sin(elapsedTime * 3) * 0.05;
-      innerRing.scale.set(pulse, pulse, 1);
-
-      // Tally light blink (simulates video recording)
-      tallyMat.color.setHex((Math.sin(elapsedTime * 4) > 0) ? 0xef4444 : 0x450a0a);
-
-      // Rotate bokeh particles
-      particles.rotation.y = elapsedTime * 0.04;
-      particles.rotation.x = elapsedTime * 0.02;
-
-      // HUD subtle breathing
-      hudGroup.rotation.z = Math.sin(elapsedTime * 0.3) * 0.02;
+      // Rotate particles subtly
+      particles.rotation.y = elapsedTime * 0.03;
 
       renderer.render(scene, camera);
     };
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!isVisible) {
+              isVisible = true;
+              clock.start();
+              animate();
+            }
+          } else {
+            isVisible = false;
+            if (animationFrameId) {
+              cancelAnimationFrame(animationFrameId);
+              animationFrameId = null;
+            }
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(currentMount);
     animate();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      isVisible = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', handleResize);
       if (currentMount.contains(renderer.domElement)) {
         currentMount.removeChild(renderer.domElement);
@@ -326,40 +292,39 @@ export default function Hero3DCamera() {
   }, []);
 
   return (
-    <div className="relative w-full h-[480px] sm:h-[550px] lg:h-[650px] flex items-center justify-center">
+    <div className="relative w-full h-[450px] sm:h-[500px] lg:h-[580px] flex items-center justify-center">
       {/* 3D WebGL Canvas */}
       <div ref={mountRef} className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing" />
 
       {/* Floating HUD Badges surrounding the 3D Camera */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 sm:p-8">
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-4 sm:p-6">
         {/* Top Badges */}
-        <div className="flex justify-between items-center text-xs font-mono text-amber-400/80">
-          <div className="flex items-center space-x-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-amber-500/20">
+        <div className="flex justify-between items-center text-xs font-mono text-amber-500 dark:text-amber-400/90">
+          <div className="flex items-center space-x-2 bg-white/90 dark:bg-black/60 px-3 py-1.5 rounded-full border border-slate-200 dark:border-amber-500/20 shadow-md">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-            <span>4K CINEMA • 120FPS</span>
+            <span className="font-bold">4K CINEMA • 120FPS</span>
           </div>
-          <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-700 text-slate-300">
-            <span>S-LOG3 • 10-BIT 4:2:2</span>
+          <div className="bg-white/90 dark:bg-black/60 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 shadow-md">
+            <span>S-LOG3 • 10-BIT</span>
           </div>
         </div>
 
         {/* Bottom Specs HUD */}
         <div className="flex flex-wrap justify-between items-end gap-3 text-xs font-mono">
-          <div className="bg-black/70 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-slate-300">
-            <p className="text-amber-400 font-semibold text-[11px] uppercase tracking-wider">Aperture</p>
-            <p className="text-sm font-bold text-white">f/1.2 G-Master</p>
+          <div className="bg-white/95 dark:bg-black/70 px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 shadow-md">
+            <p className="text-amber-500 dark:text-amber-400 font-semibold text-[10px] uppercase tracking-wider">Aperture</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-white">f/1.2 G-Master</p>
           </div>
-          <div className="bg-black/70 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 text-slate-300">
-            <p className="text-amber-400 font-semibold text-[11px] uppercase tracking-wider">Dynamic Range</p>
-            <p className="text-sm font-bold text-white">15+ Stops RAW</p>
+          <div className="bg-white/95 dark:bg-black/70 px-4 py-2 rounded-xl border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 shadow-md">
+            <p className="text-amber-500 dark:text-amber-400 font-semibold text-[10px] uppercase tracking-wider">Sensor Range</p>
+            <p className="text-sm font-bold text-slate-900 dark:text-white">15+ Stops RAW</p>
           </div>
-          <div className="bg-black/70 backdrop-blur-md px-4 py-2 rounded-lg border border-amber-500/30 text-amber-300">
-            <p className="text-[10px] uppercase tracking-wider text-amber-400">Interaction</p>
-            <p className="text-xs font-medium">Move mouse / drag in 3D ↺</p>
+          <div className="bg-white/95 dark:bg-black/70 px-4 py-2 rounded-xl border border-amber-500/30 text-amber-600 dark:text-amber-300 shadow-md">
+            <p className="text-[10px] uppercase tracking-wider text-amber-500 dark:text-amber-400">Interaction</p>
+            <p className="text-xs font-medium">3D Cursor Parallax ↺</p>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
