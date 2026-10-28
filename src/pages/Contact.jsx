@@ -6,6 +6,7 @@ import {
   Sparkles, Calendar, Clock, Star, ShieldCheck, Heart 
 } from 'lucide-react';
 import SEOBadge from '../components/SEOBadge';
+import TiltCard from '../components/TiltCard';
 
 export default function Contact() {
   const location = useLocation();
@@ -84,7 +85,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 text-slate-100 pt-28 pb-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 pt-28 pb-20 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -92,10 +93,10 @@ export default function Contact() {
           <div className="flex justify-center">
             <SEOBadge />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black font-display text-white tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-black font-display text-slate-900 dark:text-white tracking-tight">
             Hire Rohit Upreti <span className="text-gold-gradient">• Book a Shoot</span>
           </h1>
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
             Ready to secure your wedding dates, schedule a 4K commercial video shoot, or order studio photo/video color grading? Fill out the inquiry form below for a rapid response within 2 hours.
           </p>
         </div>
@@ -104,93 +105,95 @@ export default function Contact() {
           
           {/* Left Column: Direct Contact Info & Uttarakhand Studio Details */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6">
-              <h3 className="text-xl font-bold font-display text-white pb-3 border-b border-white/10 flex items-center space-x-2">
-                <Sparkles className="w-5 h-5 text-amber-400" />
-                <span>Direct Studio Contact</span>
-              </h3>
+            <TiltCard maxTilt={5}>
+              <div className="glass-panel rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 space-y-6 shadow-xl">
+                <h3 className="text-xl font-bold font-display text-slate-900 dark:text-white pb-3 border-b border-slate-200 dark:border-white/10 flex items-center space-x-2">
+                  <Sparkles className="w-5 h-5 text-amber-500" />
+                  <span>Direct Studio Contact</span>
+                </h3>
 
-              {/* Contact item: Phone */}
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0">
-                  <Phone className="w-5 h-5" />
+                {/* Contact item: Phone */}
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20 shrink-0">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase">Phone & WhatsApp</p>
+                    <a
+                      href="tel:+919876543210"
+                      className="text-base font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors"
+                    >
+                      +91 98765 43210
+                    </a>
+                    <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono mt-0.5">● Available 8:00 AM - 10:00 PM IST</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs font-mono text-slate-400 uppercase">Phone & WhatsApp</p>
+
+                {/* Contact item: Email */}
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500 border border-blue-500/20 shrink-0">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase">Official Email</p>
+                    <a
+                      href="mailto:contact@rohitupreti.com"
+                      className="text-base font-bold text-slate-900 dark:text-white hover:text-amber-500 transition-colors"
+                    >
+                      contact@rohitupreti.com
+                    </a>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">Replies typically in 2 hours</p>
+                  </div>
+                </div>
+
+                {/* Contact item: Studio Address */}
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 shrink-0">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-mono text-slate-500 dark:text-slate-400 uppercase">Studio Location</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">
+                      Rajpur Road, Near Jakhan
+                    </p>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                      Dehradun, Uttarakhand - 248001, India
+                    </p>
+                  </div>
+                </div>
+
+                {/* Quick WhatsApp Action Banner */}
+                <div className="pt-4 border-t border-slate-200 dark:border-white/10">
                   <a
-                    href="tel:+919876543210"
-                    className="text-base font-bold text-white hover:text-amber-400 transition-colors"
+                    href="https://wa.me/919876543210?text=Hi%20Rohit!%20I%20am%20looking%20to%20hire%20you%20for%20a%20shoot%20in%20Uttarakhand."
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full inline-flex items-center justify-center space-x-2 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold font-mono text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
                   >
-                    +91 98765 43210
+                    <MessageSquare className="w-4 h-4 fill-black" />
+                    <span>INSTANT CHAT ON WHATSAPP</span>
                   </a>
-                  <p className="text-[11px] text-emerald-400 font-mono mt-0.5">● Available 8:00 AM - 10:00 PM IST</p>
                 </div>
               </div>
-
-              {/* Contact item: Email */}
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 shrink-0">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs font-mono text-slate-400 uppercase">Official Email</p>
-                  <a
-                    href="mailto:contact@rohitupreti.com"
-                    className="text-base font-bold text-white hover:text-amber-400 transition-colors"
-                  >
-                    contact@rohitupreti.com
-                  </a>
-                  <p className="text-[11px] text-slate-400 font-mono mt-0.5">Replies typically in 2 hours</p>
-                </div>
-              </div>
-
-              {/* Contact item: Studio Address */}
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-xs font-mono text-slate-400 uppercase">Studio Location</p>
-                  <p className="text-sm font-bold text-white">
-                    Rajpur Road, Near Jakhan
-                  </p>
-                  <p className="text-xs text-slate-400">
-                    Dehradun, Uttarakhand - 248001, India
-                  </p>
-                </div>
-              </div>
-
-              {/* Quick WhatsApp Action Banner */}
-              <div className="pt-4 border-t border-white/10">
-                <a
-                  href="https://wa.me/919876543210?text=Hi%20Rohit!%20I%20am%20looking%20to%20hire%20you%20for%20a%20shoot%20in%20Uttarakhand."
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full inline-flex items-center justify-center space-x-2 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold font-mono text-xs py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
-                >
-                  <MessageSquare className="w-4 h-4 fill-black" />
-                  <span>INSTANT CHAT ON WHATSAPP</span>
-                </a>
-              </div>
-            </div>
+            </TiltCard>
 
             {/* Uttarakhand Service Guarantee Box */}
-            <div className="glass-card rounded-2xl p-6 border border-white/10 space-y-3 text-xs text-slate-300">
-              <h4 className="font-bold text-white font-mono uppercase tracking-wider flex items-center space-x-2">
-                <ShieldCheck className="w-4 h-4 text-amber-400" />
+            <div className="glass-card rounded-2xl p-6 border border-slate-200 dark:border-white/10 space-y-3 text-xs text-slate-600 dark:text-slate-300 shadow-md">
+              <h4 className="font-bold text-slate-900 dark:text-white font-mono uppercase tracking-wider flex items-center space-x-2">
+                <ShieldCheck className="w-4 h-4 text-amber-500" />
                 <span>The Rohit Upreti Guarantee</span>
               </h4>
               <ul className="space-y-2 font-sans">
                 <li className="flex items-start space-x-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Locked-in dates with formal signed contract</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Dual camera-card RAW backups immediately after shoot</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                   <span>Free cloud gallery hosting for 1 full year</span>
                 </li>
               </ul>
@@ -204,30 +207,30 @@ export default function Contact() {
               {submitted ? (
                 /* Submission Confirmation View */
                 <div className="py-12 text-center space-y-6 animate-fadeIn">
-                  <div className="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto shadow-2xl shadow-emerald-500/20">
+                  <div className="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-500 border border-emerald-500/40 flex items-center justify-center mx-auto shadow-2xl shadow-emerald-500/20">
                     <CheckCircle className="w-10 h-10" />
                   </div>
 
                   <div className="space-y-2">
-                    <h3 className="text-2xl sm:text-3xl font-black font-display text-white">
+                    <h3 className="text-2xl sm:text-3xl font-black font-display text-slate-900 dark:text-white">
                       Inquiry Received Successfully!
                     </h3>
-                    <p className="text-sm text-slate-300 max-w-md mx-auto">
-                      Thank you, <span className="text-amber-400 font-bold">{formData.name}</span>. Rohit Upreti has received your booking details and will review his calendar shortly.
+                    <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+                      Thank you, <span className="text-amber-500 font-bold">{formData.name}</span>. Rohit Upreti has received your booking details and will review his calendar shortly.
                     </p>
                   </div>
 
                   {/* Summary Box */}
-                  <div className="bg-dark-800/90 p-4 rounded-xl border border-white/10 max-w-md mx-auto text-left text-xs font-mono space-y-1.5 text-slate-300">
-                    <p><span className="text-slate-500">Service:</span> {formData.service}</p>
-                    <p><span className="text-slate-500">Location:</span> {formData.shootLocation}</p>
-                    <p><span className="text-slate-500">Target Date:</span> {formData.eventDate || 'Pending Discussion'}</p>
-                    <p><span className="text-slate-500">Budget Range:</span> {formData.budget}</p>
+                  <div className="bg-slate-100 dark:bg-dark-800/90 p-4 rounded-xl border border-slate-200 dark:border-white/10 max-w-md mx-auto text-left text-xs font-mono space-y-1.5 text-slate-700 dark:text-slate-300">
+                    <p><span className="text-slate-400">Service:</span> {formData.service}</p>
+                    <p><span className="text-slate-400">Location:</span> {formData.shootLocation}</p>
+                    <p><span className="text-slate-400">Target Date:</span> {formData.eventDate || 'Pending Discussion'}</p>
+                    <p><span className="text-slate-400">Budget Range:</span> {formData.budget}</p>
                   </div>
 
                   {/* WhatsApp Push Action */}
                   <div className="pt-2 space-y-3">
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       Want an immediate response? Forward your details directly to Rohit's WhatsApp:
                     </p>
                     <a
@@ -244,7 +247,7 @@ export default function Contact() {
                   <div className="pt-4">
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="text-xs font-mono text-slate-400 hover:text-white underline"
+                      className="text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white underline cursor-pointer"
                     >
                       Fill another request
                     </button>
@@ -254,10 +257,10 @@ export default function Contact() {
                 /* Primary Hire Me Form */
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-black font-display text-white">
+                    <h2 className="text-2xl font-black font-display text-slate-900 dark:text-white">
                       Hire Me / Booking Application
                     </h2>
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                       Please provide details about your wedding, shoot, or editing requirements.
                     </p>
                   </div>
@@ -265,7 +268,7 @@ export default function Contact() {
                   {/* Name & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                      <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                         Your Full Name *
                       </label>
                       <input
@@ -275,12 +278,12 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="e.g. Rahul Sharma"
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-sans"
+                        className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-sans shadow-sm"
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                      <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                         Phone / WhatsApp *
                       </label>
                       <input
@@ -290,7 +293,7 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+91 98765 XXXXX"
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-sans"
+                        className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-sans shadow-sm"
                       />
                     </div>
                   </div>
@@ -298,7 +301,7 @@ export default function Contact() {
                   {/* Email & Service */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                      <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                         Email Address *
                       </label>
                       <input
@@ -308,19 +311,19 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@domain.com"
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-sans"
+                        className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-sans shadow-sm"
                       />
                     </div>
 
                     <div>
-                      <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                      <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                         Service Needed *
                       </label>
                       <select
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                        className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-mono shadow-sm"
                       >
                         <option value="Destination Wedding Photography & Films">Destination Wedding (Photo + Cinema)</option>
                         <option value="4K Video Shooting & Direction">4K Video Shooting & Direction</option>
@@ -336,14 +339,14 @@ export default function Contact() {
                   {/* Shoot Location & Event Date */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                      <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                         Shoot Location *
                       </label>
                       <select
                         name="shootLocation"
                         value={formData.shootLocation}
                         onChange={handleChange}
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                        className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-mono shadow-sm"
                       >
                         <option value="Dehradun">Dehradun, Uttarakhand</option>
                         <option value="Rishikesh">Rishikesh, Uttarakhand</option>
@@ -359,7 +362,7 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                      <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                         Target Date of Shoot
                       </label>
                       <input
@@ -367,14 +370,14 @@ export default function Contact() {
                         name="eventDate"
                         value={formData.eventDate}
                         onChange={handleChange}
-                        className="w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400 font-mono"
+                        className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-mono shadow-sm"
                       />
                     </div>
                   </div>
 
                   {/* Budget Selector */}
                   <div>
-                    <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                    <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                       Estimated Budget Range (INR)
                     </label>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -388,7 +391,7 @@ export default function Contact() {
                             className={`py-2 px-3 rounded-lg text-xs font-mono transition-all border ${
                               isSelected
                                 ? 'bg-amber-500 text-black border-amber-400 font-bold'
-                                : 'bg-dark-800 text-slate-300 border-white/10 hover:border-amber-400/40'
+                                : 'bg-white dark:bg-dark-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:border-amber-400/40 shadow-sm'
                             }`}
                           >
                             {range}
@@ -400,7 +403,7 @@ export default function Contact() {
 
                   {/* Message */}
                   <div>
-                    <label className="text-xs font-mono text-slate-300 uppercase block mb-1.5 font-bold">
+                    <label className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase block mb-1.5 font-bold">
                       Project Vision / Special Requests
                     </label>
                     <textarea
@@ -408,8 +411,8 @@ export default function Contact() {
                       rows="4"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell Rohit about your venue, number of guests, key moments, or reference film styles..."
-                      className="w-full bg-dark-800 border border-white/10 rounded-xl p-4 text-sm text-white focus:outline-none focus:border-amber-400 font-sans"
+                      placeholder="Tell Rohit about your venue (e.g. Taj Rishikesh), key moments, reference film styles..."
+                      className="w-full bg-white dark:bg-dark-800 border border-slate-200 dark:border-white/10 rounded-xl p-4 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-400 font-sans shadow-sm"
                     ></textarea>
                   </div>
 
@@ -429,7 +432,7 @@ export default function Contact() {
                     )}
                   </button>
 
-                  <p className="text-[11px] font-mono text-center text-slate-400">
+                  <p className="text-[11px] font-mono text-center text-slate-500 dark:text-slate-400">
                     🔒 No spam. Your phone and email remain 100% confidential.
                   </p>
                 </form>
@@ -444,4 +447,3 @@ export default function Contact() {
     </div>
   );
 }
-

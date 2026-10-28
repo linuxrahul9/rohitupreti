@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CustomerEngagementBar from './components/CustomerEngagementBar';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Pages
 import Home from './pages/Home';
@@ -26,26 +28,29 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-dark-900 text-slate-100 font-sans selection:bg-amber-500 selection:text-black">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/films" element={<Films />} />
-            <Route path="/editing" element={<EditingStudio />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* Fallback */}
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-dark-900 text-slate-900 dark:text-slate-100 font-sans selection:bg-amber-500 selection:text-black transition-colors duration-300">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/films" element={<Films />} />
+              <Route path="/editing" element={<EditingStudio />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              {/* Fallback */}
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </main>
+          <Footer />
+          {/* Customer Engagement Interactive Live Bar */}
+          <CustomerEngagementBar />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
-
